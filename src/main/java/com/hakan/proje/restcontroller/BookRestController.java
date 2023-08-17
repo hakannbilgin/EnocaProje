@@ -25,18 +25,19 @@ public class BookRestController {
 	
 	
 	@PostMapping("/saveBook")
-	public Book saveAuthor(@RequestBody Book book) {
+	public Book saveBook(@RequestBody Book book) {
 
 		return bookService.saveBook(book);
 	}
 	
-	// bookları Listeler
+	
 		@GetMapping("/getBooks")
 		public List<Book> getBooksList() {
 
 			return bookService.getBookList();
 		}
-		// seçilen book'u getirir
+		
+		
 		@GetMapping("/getBookById/{bookId}")
 		public Book getBookById(@PathVariable(name = "bookId", required = true) Long bookId) {
 

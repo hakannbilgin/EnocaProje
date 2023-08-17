@@ -27,13 +27,13 @@ public class BookService {
 
 	}
 
-	// bookların hepsini getirir
+	
 	@Cacheable(value = "book_list")
 	public List<Book> getBookList() {
 		return bookRepository.findAll();
 	}
 
-	// İd ile book'u bulup getirir.
+	
 	@CachePut(value = "books", key = "#bookId")
 	public Book selectedBookbyId(Long bookId) {
 		return bookRepository.getBookById(bookId);

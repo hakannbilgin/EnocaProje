@@ -25,7 +25,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	public Book getBookByBookName(@Param("bookName") String bookName);
 	
 	@Query("SELECT b FROM book b WHERE b.bookName IN :bookName")
-	public List<Author> findBooksByBookName(@Param("bookName") String bookName);
+	public List<Book> findBooksByBookName(@Param("bookName") String bookName);
 	
 	@Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
 	@Modifying
