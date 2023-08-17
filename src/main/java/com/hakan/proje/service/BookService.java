@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.hakan.proje.dal.BookRepository;
 import com.hakan.proje.domain.Book;
 
@@ -33,27 +32,21 @@ public class BookService {
 	public List<Book> getBookList() {
 		return bookRepository.findAll();
 	}
-	
-	// İd ile book'u  bulup getirir.
-		@CachePut(value = "books", key = "#bookId")
-		public Book selectedAppointmentbyId(Long bookId) {
-			return bookRepository.getBookById(bookId);
-		}
-		
-		// book id si ile book siler
-		@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
-		@CacheEvict(key = "#bookId", allEntries = true, cacheNames = { "book_list", "books" })
-		public Boolean deleteBookbyId(Long bookId) {
-			bookRepository.deleteById(bookId);
-			return true;
-		}
-	
-	
 
-	
-	
-	
-	
+	// İd ile book'u bulup getirir.
+	@CachePut(value = "books", key = "#bookId")
+	public Book selectedBookbyId(Long bookId) {
+		return bookRepository.getBookById(bookId);
+	}
+
+	// book id si ile book siler
+	@Transactional(isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRES_NEW)
+	@CacheEvict(key = "#bookId", allEntries = true, cacheNames = { "book_list", "books" })
+	public Boolean deleteBookbyId(Long bookId) {
+		bookRepository.deleteById(bookId);
+		return true;
+	}
+
 	public BookRepository getBookRepository() {
 		return bookRepository;
 	}

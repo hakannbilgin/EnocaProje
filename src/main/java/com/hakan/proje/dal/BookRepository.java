@@ -30,7 +30,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	@Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
 	@Modifying
 	@Query("UPDATE book b SET b.bookName = :bookName WHERE b.bookId = :bookIdPar")
-	public Integer updateAuthorName(@Param("bookName") String bookName, @Param("bookIdPar") Long bookId);
+	public Integer updateBookName(@Param("bookName") String bookName, @Param("bookIdPar") Long bookId);
 	
 	@Query("select b FROM book b WHERE b.publishDate = :date")
 	public List<Book> getBookByDate(@Param("date") LocalDate date);
